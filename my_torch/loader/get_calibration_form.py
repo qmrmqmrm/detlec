@@ -103,15 +103,17 @@ def transform_from_to(src, target):
 def get_calibration(root_path):
     config = load_json(root_path)
 
-    target_view = config['cameras']['front_center']['view']
-    src_view = config['lidars']['front_center']['view']
-    rot = get_rot_to_global(target_view)
-    transform = transform_from_to(src_view, target_view)
+    camera_view = config['cameras']['front_center']['view']
+    lidar_view = config['lidars']['front_center']['view']
+    rot = get_rot_to_global(camera_view)
+    transform_V2C = transform_from_to(lidar_view, camera_view)
+    transform_C2V = transform_from_to(camera_view, lidar_view)
 
     calibriation_dict = dict()
 
-    calibriation_dict["R0_rect"] = rot
-    calibriation_dict["Tr_velo_to_cam"] = transform
+    calibriation_dict["R0"] = rot
+    calibriation_dict["V2C"] = transform_V2C
+    calibriation_dict["C2V"] = transform_C2V
     return calibriation_dict
 
 
