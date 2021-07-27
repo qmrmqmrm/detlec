@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-from torch_loader.config import Config as cfg
+from torch.config import Config as cfg
 
 def set_gpu_configs():
     gpus = tf.config.experimental.list_physical_devices('GPU')

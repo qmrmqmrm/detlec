@@ -8,15 +8,13 @@ class Dataset_Base(Dataset):
     """ Diabetes dataset."""
 
     # Initialize your data, download, etc.
-    def __init__(self, img_dict, anno_dict):
-        self.img_dict = img_dict
+    def __init__(self, anno_dict):
         self.anno_dict = anno_dict
-        self.len = len(img_dict)
+        self.len = len(self.anno_dict)
 
     def __getitem__(self, index):
-        self.image = torch.from_numpy(self.img_dict)
         self.annotation = torch.from_numpy(self.anno_dict)
-        return self.image[index], self.annotation[index]
+        return self.annotation[index]
 
     def __len__(self):
         return self.len
