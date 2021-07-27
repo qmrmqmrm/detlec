@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 import json
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 
 
 class Dataset_Base(Dataset):
@@ -13,8 +13,8 @@ class Dataset_Base(Dataset):
         self.len = len(self.anno_dict)
 
     def __getitem__(self, index):
-        self.annotation = torch.from_numpy(self.anno_dict)
-        return self.annotation[index]
+        # self.annotation = torch.from_numpy(self.anno_dict[index].values())
+        return self.anno_dict[index]
 
     def __len__(self):
         return self.len
